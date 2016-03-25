@@ -1,6 +1,11 @@
 var router = require('express').Router();
 
 module.exports = function(server){
+
+    router.get('/future', server.actions.events.list.futureEvents);
+
+    router.get('/past', server.actions.events.list.pastEvents);
+
     router.get('/',server.actions.events.get);
     router.post('/', server.middlewares.bodyparser,server.actions.events.create);
     router.get('/:id',server.actions.events.show);
@@ -11,7 +16,7 @@ module.exports = function(server){
         server.middlewares.authorizedTo.editEvent, // if authorized
         server.actions.events.remove); // then can remove
 
-    router.get('/', server.actions.events.get);
+
 
     router.post('/',
         server.middlewares.bodyparser,
