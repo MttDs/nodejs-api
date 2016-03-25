@@ -5,5 +5,6 @@ module.exports = function(server) {
         show: require('./show')(server),
         update: require('./update')(server),
         remove: require('./remove')(server),
+        events: require('./events')(server)
     };
 }
