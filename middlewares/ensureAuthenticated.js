@@ -6,7 +6,7 @@ module.exports = function(server){
         var token = req.headers.authorization;
 
         if (!token)
-            res.status(401).send('authentication required')
+            return res.status(401).send('authentication required')
 
         jwt.verify(token, server.settings.secret_token, function(err, verified){
 
