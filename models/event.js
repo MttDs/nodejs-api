@@ -20,7 +20,17 @@ module.exports = function(server){
             type : Number,
             required : true,
             min : 10
-        }
+        },
+        organizer:{
+            type: server.mongoose.Schema.Types.ObjectId,
+            ref: "User",
+            required : true
+        },
+        participants :[{
+          type: server.mongoose.Schema.Types.ObjectId,
+          ref: 'User',
+          required : true
+        }]
     });
 
     EventSchema.plugin(require('mongoose-timestamp'));
