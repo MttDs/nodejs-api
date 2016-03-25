@@ -1,4 +1,3 @@
-
 module.exports = function(server){
     return function(req, res, next){
         var Event = server.models.Event;
