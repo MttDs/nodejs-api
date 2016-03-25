@@ -31,7 +31,7 @@ function getCategory(server, newEvent, label, cb) {
 module.exports = function(server){
     return function(req, res, next){
         var Event = server.models.Event;
-        var thisEvent = new Event(req.body)
+        var thisEvent = new Event(req.body);
 
         getCategory(server, thisEvent, req.body.category_name, function() {
             thisEvent.save(function(err, data){
