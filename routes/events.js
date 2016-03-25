@@ -1,6 +1,11 @@
 var router = require('express').Router();
 
 module.exports = function(server){
+
+    router.get('/future', server.actions.events.list.futureEvents);
+
+    router.get('/past', server.actions.events.list.pastEvents);
+
     router.get('/',server.actions.events.get);
 
     router.delete('/:id',
