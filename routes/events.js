@@ -2,16 +2,11 @@ var router = require('express').Router();
 
 module.exports = function(server){
     router.get('/',server.actions.events.get);
-    router.post('/', server.middlewares.bodyparser,server.actions.events.create);
-    router.get('/:id',server.actions.events.show);
-    router.put('/:id', server.middlewares.bodyparser, server.actions.events.update);
 
     router.delete('/:id',
         server.middlewares.ensureAuthenticated, //if connected
         server.middlewares.authorizedTo.editEvent, // if authorized
         server.actions.events.remove); // then can remove
-
-    router.get('/', server.actions.events.get);
 
     router.post('/',
         server.middlewares.bodyparser,
@@ -24,11 +19,19 @@ module.exports = function(server){
     router.put('/:id',
         server.middlewares.bodyparser,
         server.middlewares.ensureAuthenticated,
-        server.actions.events.update);
+        server.actions.events.update
+    );
 
-    router.delete('/:id',
+    router.post('/:id/subscribe',
         server.middlewares.ensureAuthenticated,
-        server.actions.events.remove
+        server.middlewares.bodyparser,
+        server.actions.events.subscribe
+    );
+
+    router.post('/:id/unsubscribe',
+        server.middlewares.ensureAuthenticated,
+        server.middlewares.bodyparser,
+        server.actions.events.unsubscribe
     );
 
     return router;
