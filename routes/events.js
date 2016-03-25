@@ -29,6 +29,7 @@ module.exports = function(server){
 
     router.post('/:id/subscribe',
         server.middlewares.ensureAuthenticated,
+        server.middlewares.authorizedTo.participateToEvent,
         server.middlewares.bodyparser,
         server.actions.events.subscribe
     );
