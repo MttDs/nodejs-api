@@ -20,6 +20,11 @@ module.exports = function(server){
             type : Number,
             required : true,
             min : 10
+        },
+        category: {
+          type: server.mongoose.Schema.Types.ObjectId,
+          ref: 'Category',
+          required: true
         }
     });
 
