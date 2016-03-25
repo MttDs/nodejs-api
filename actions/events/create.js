@@ -31,14 +31,24 @@ function getCategory(server, newEvent, label, cb) {
 module.exports = function(server){
     return function(req, res, next){
         var Event = server.models.Event;
+        var User = server.models.User;
         var thisEvent = new Event(req.body);
 
         getCategory(server, thisEvent, req.body.category_name, function() {
-            thisEvent.save(function(err, data){
+
+            User.findOne({ _id: req.auth.userId }, function(err, user){
                 if (err)
                     return res.status(500).send(err)
 
-                res.send(data);
+                thisEvent.organizer = user;
+                thisEvent.participants.push(user);
+
+                thisEvent.save(function(err, data){
+                    if (err)
+                        return res.status(500).send(err)
+
+                    res.send(data);
+                });
             });
         });
     };
