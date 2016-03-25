@@ -21,6 +21,11 @@ module.exports = function(server){
             required : true,
             min : 10
         },
+        category: {
+          type: server.mongoose.Schema.Types.ObjectId,
+          ref: 'Category',
+          required: true
+        },
         organizer:{
             type: server.mongoose.Schema.Types.ObjectId,
             ref: "User",
