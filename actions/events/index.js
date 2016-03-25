@@ -5,6 +5,8 @@ module.exports = function(server) {
         show: require('./show')(server),
         update: require('./update')(server),
         remove: require('./remove')(server),
-        list : require('./list') (server)
+        list : require('./list') (server),
+        subscribe: require('./subscribe')(server),
+        unsubscribe: require('./unsubscribe')(server)
     };
 }
